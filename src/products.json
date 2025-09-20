@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Mouse Gamer",
+    "description": "Mouse ergonómico con retroiluminación RGB",
+    "price": 25,
+    "thumbnail": "images/mouse.jpg",
+    "code": "MOUSE123",
+    "stock": 100
+  },
+  {
+    "id": 2,
+    "title": "Teclado Mecánico",
+    "description": "Teclado mecánico con switches azules y luces LED",
+    "price": 70,
+    "thumbnail": "images/teclado.jpg",
+    "code": "KEYB456",
+    "stock": 50
+  },
+  {
+    "id": 3,
+    "title": "Auriculares Inalámbricos",
+    "description": "Auriculares bluetooth con cancelación de ruido",
+    "price": 120,
+    "thumbnail": "images/auriculares.jpg",
+    "code": "HEAD789",
+    "stock": 30
+  },
+  {
+    "id": 4,
+    "title": "Monitor Full HD",
+    "description": "Monitor 24 pulgadas con resolución 1920x1080",
+    "price": 200,
+    "thumbnail": "images/monitor.jpg",
+    "code": "MONIT111",
+    "stock": 15
+  },
+  {
+    "id": 5,
+    "title": "Silla Gamer",
+    "description": "Silla ergonómica ajustable con soporte lumbar",
+    "price": 180,
+    "thumbnail": "images/silla.jpg",
+    "code": "CHAIR222",
+    "stock": 25
+  },
+  {
+    "id": 6,
+    "title": "Impresora 3D",
+    "description": "Impresora 3D para prototipado rápido",
+    "price": 600,
+    "thumbnail": "images/impresora3d.jpg",
+    "code": "PRINT333",
+    "stock": 5
+  },
+  {
+    "id": 7,
+    "title": "Disco SSD 1TB",
+    "description": "Unidad de estado sólido NVMe de alta velocidad",
+    "price": 150,
+    "thumbnail": "images/ssd.jpg",
+    "code": "SSD444",
+    "stock": 40
+  },
+  {
+    "id": 8,
+    "title": "Placa de Video RTX 3060",
+    "description": "Tarjeta gráfica para gaming y diseño 3D",
+    "price": 450,
+    "thumbnail": "images/rtx3060.jpg",
+    "code": "GPU555",
+    "stock": 12
+  },
+  {
+    "id": 9,
+    "title": "Procesador Ryzen 7",
+    "description": "CPU de 8 núcleos ideal para multitarea",
+    "price": 320,
+    "thumbnail": "images/ryzen7.jpg",
+    "code": "CPU666",
+    "stock": 20
+  },
+  {
+    "id": 10,
+    "title": "Memoria RAM 16GB",
+    "description": "Módulo DDR4 de 3200 MHz",
+    "price": 80,
+    "thumbnail": "images/ram16gb.jpg",
+    "code": "RAM777",
+    "stock": 60
+  }
+]
