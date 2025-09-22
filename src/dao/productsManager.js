@@ -1,5 +1,6 @@
 const fs = require("fs");
 const crypto = require("crypto");
+const { parse } = require("path");
 
 
 class ProductManager{
@@ -20,7 +21,7 @@ async readFile(){
 };
 
 async writeFile(products){
-    await fs.promises.writeFile(this.path, JSON.stringify(products, null , 2));
+    await fs.promises.writeFile(this.path, JSON.stringify(products, null , "\t"));
 }
 
 async addProduct(productData){
