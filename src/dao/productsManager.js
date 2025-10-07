@@ -1,13 +1,9 @@
 const fs = require("fs");
-const crypto = require("crypto");
-const { parse } = require("path");
-
 
 class ProductManager{
     constructor(path){
         this.path = path;
     }
-
 
 //metodos
 
@@ -26,19 +22,18 @@ async writeFile(products){
 
 async addProduct(productData){
     const products = await this.readFile();
-
-    const exist= products.find(p => p.code === productData.code )
-    if(exist){
-        throw new Error(`Ya existe el producto con el code ${productData.code}`);
-    }
+    const newId = products.length > 0 
+    ? Math.max(...products.map((p) => Number(p.id))) + 1
+    : 1 ;
 
     const newProduct = {
-        id: crypto.randomUUID(),
+        id: newId,
         title: productData.title,
         description: productData.description,
         code: productData.code,
         price: Number(productData.price),
         stock: Number(productData.stock),
+        thumbnail: productData.thumbnail,
         category: productData.category
     }
 
@@ -58,21 +53,25 @@ async getProducts(){
 
 async getProductById(id){
     const products = await this.readFile();
-    const product = products.find((p) => p.id === id);
-    return product || null;
+    const product = products.find((p) => p.id === Number(id))  || null;
+    return product;
 }
-//eliminar producto
+
 
 async deleteProduct(id){
-    const products = await this.readFile();
-    const productoFiltrado = products.filter((p) => String(p.id) !== String(id))
+    const products= await this.getProducts();
+    const index = products.findIndex(p => p.id === id);
 
-    if(productoFiltrado.length === products.length){
-        return false
-    };
+    if(index === -1){
+        return null;
+    }
 
-    await this.writeFile(productoFiltrado)
-    return true;
+    const productDeleted = products[index];
+    products.splice(index, 1);
+    await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
+
+    return productDeleted;
+
 }
 }
 
