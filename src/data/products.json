@@ -1,92 +1,101 @@
 [
-  {
-    "id": 1,
-    "title": "Mouse Gamer",
-    "description": "Mouse ergonómico con retroiluminación RGB",
-    "price": 25,
-    "thumbnail": "images/mouse.jpg",
-    "code": "MOUSE123",
-    "stock": 100
-  },
-  {
-    "id": 2,
-    "title": "Teclado Mecánico",
-    "description": "Teclado mecánico con switches azules y luces LED",
-    "price": 70,
-    "thumbnail": "images/teclado.jpg",
-    "code": "KEYB456",
-    "stock": 50
-  },
-  {
-    "id": 3,
-    "title": "Auriculares Inalámbricos",
-    "description": "Auriculares bluetooth con cancelación de ruido",
-    "price": 120,
-    "thumbnail": "images/auriculares.jpg",
-    "code": "HEAD789",
-    "stock": 30
-  },
-  {
-    "id": 4,
-    "title": "Monitor Full HD",
-    "description": "Monitor 24 pulgadas con resolución 1920x1080",
-    "price": 200,
-    "thumbnail": "images/monitor.jpg",
-    "code": "MONIT111",
-    "stock": 15
-  },
-  {
-    "id": 5,
-    "title": "Silla Gamer",
-    "description": "Silla ergonómica ajustable con soporte lumbar",
-    "price": 180,
-    "thumbnail": "images/silla.jpg",
-    "code": "CHAIR222",
-    "stock": 25
-  },
-  {
-    "id": 6,
-    "title": "Impresora 3D",
-    "description": "Impresora 3D para prototipado rápido",
-    "price": 600,
-    "thumbnail": "images/impresora3d.jpg",
-    "code": "PRINT333",
-    "stock": 5
-  },
-  {
-    "id": 7,
-    "title": "Disco SSD 1TB",
-    "description": "Unidad de estado sólido NVMe de alta velocidad",
-    "price": 150,
-    "thumbnail": "images/ssd.jpg",
-    "code": "SSD444",
-    "stock": 40
-  },
-  {
-    "id": 8,
-    "title": "Placa de Video RTX 3060",
-    "description": "Tarjeta gráfica para gaming y diseño 3D",
-    "price": 450,
-    "thumbnail": "images/rtx3060.jpg",
-    "code": "GPU555",
-    "stock": 12
-  },
-  {
-    "id": 9,
-    "title": "Procesador Ryzen 7",
-    "description": "CPU de 8 núcleos ideal para multitarea",
-    "price": 320,
-    "thumbnail": "images/ryzen7.jpg",
-    "code": "CPU666",
-    "stock": 20
-  },
-  {
-    "id": 10,
-    "title": "Memoria RAM 16GB",
-    "description": "Módulo DDR4 de 3200 MHz",
-    "price": 80,
-    "thumbnail": "images/ram16gb.jpg",
-    "code": "RAM777",
-    "stock": 60
-  }
+	{
+		"id": 1,
+		"title": "Mouse Gamer",
+		"description": "Mouse ergonómico con retroiluminación RGB",
+		"code": "MOUSE123",
+		"thumbnail": "https://res.cloudinary.com/dglpzels3/image/upload/v1759532618/1000x1000-GAMER097_diycem.jpg",
+		"price": 25,
+		"stock": 100
+	},
+	{
+		"id": 2,
+		"title": "Teclado Mecánico",
+		"description": "Teclado mecánico con switches azules y luces LED",
+		"price": 70,
+		"thumbnail": "https://res.cloudinary.com/dglpzels3/image/upload/v1759534100/images_od8jo5.jpg",
+		"code": "KEYB456",
+		"stock": 50
+	},
+	{
+		"id": 3,
+		"title": "Auriculares Inalámbricos",
+		"description": "Auriculares bluetooth con cancelación de ruido",
+		"price": 120,
+		"thumbnail": "https://res.cloudinary.com/dglpzels3/image/upload/v1759532672/Noblex_AURI_dyslij.jpg",
+		"code": "HEAD789",
+		"stock": 30
+	},
+	{
+		"id": 4,
+		"title": "Monitor Full HD",
+		"description": "Monitor 24 pulgadas con resolución 1920x1080",
+		"price": 200,
+		"thumbnail": "https://res.cloudinary.com/dglpzels3/image/upload/v1759532694/sam24t350_primera_cy9yqm.jpg",
+		"code": "MONIT111",
+		"stock": 15
+	},
+	{
+		"id": 5,
+		"title": "Silla Gamer",
+		"description": "Silla ergonómica ajustable con soporte lumbar",
+		"price": 180,
+		"thumbnail": "https://res.cloudinary.com/dglpzels3/image/upload/v1759532651/daihatsu-silla-gamer-d-ga20rd_lsori2.jpg",
+		"code": "CHAIR222",
+		"stock": 25
+	},
+	{
+		"id": 6,
+		"title": "Impresora 3D",
+		"description": "Impresora 3D para prototipado rápido",
+		"thumbnail": "https://res.cloudinary.com/dglpzels3/image/upload/v1759532643/D_NQ_NP_723079-MLU70865962348_082023-O_lbb6lx.webp",
+		"code": "PRINT333",
+		"price": 600,
+		"stock": 5
+	},
+	{
+		"id": 7,
+		"title": "Disco SSD 1TB",
+		"description": "Unidad de estado sólido NVMe de alta velocidad",
+		"price": 150,
+		"thumbnail": "https://res.cloudinary.com/dglpzels3/image/upload/v1759532659/descarga_uuivnf.jpg",
+		"code": "SSD444",
+		"stock": 40
+	},
+	{
+		"id": 8,
+		"title": "Placa de Video RTX 3060",
+		"description": "Tarjeta gráfica para gaming y diseño 3D",
+		"price": 450,
+		"thumbnail": "https://res.cloudinary.com/dglpzels3/image/upload/v1759532680/placa-de-video-msi-geforce-rtx-3060-ventus-2x-12gb-oc_klgkhi.png",
+		"code": "GPU555",
+		"stock": 12
+	},
+	{
+		"id": 9,
+		"title": "Procesador Ryzen 7",
+		"description": "CPU de 8 núcleos ideal para multitarea",
+		"price": 320,
+		"thumbnail": "https://res.cloudinary.com/dglpzels3/image/upload/v1759532629/48270_2_fmvbkb.jpg",
+		"code": "CPU666",
+		"stock": 20
+	},
+	{
+		"id": 10,
+		"title": "Memoria RAM 16GB",
+		"description": "Módulo DDR4 de 3200 MHz",
+		"price": 80,
+		"thumbnail": "https://res.cloudinary.com/dglpzels3/image/upload/v1759532687/producto-2-4747_q6wqvt.jpg",
+		"code": "RAM777",
+		"stock": 60
+	},
+	{
+		"id": 11,
+		"title": "Lámpara LED RGB para Escritorio",
+		"description": "Lámpara decorativa con iluminación RGB controlable por app o control remoto. Ideal para ambientar tu setup de computadora.",
+		"code": "LED-SETUP-001",
+		"price": 38,
+		"stock": 50,
+		"thumbnail": "https://res.cloudinary.com/dglpzels3/image/upload/v1759859386/WhatsApp_Image_2025-04-17_at_18.05.47-550x550_vlowgq.jpg"
+	}
 ]

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda de Computadoras</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+   <style>
+    .card {
+      width: 300px;
+      height: 420px;
+      margin: 0 auto;
+    }
+    .card-img-top {
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-body {
+      overflow: hidden;
+    }
+    .card-text {
+      height: 60px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <main class="container my-5">
+    <h2 class="text-center mb-4">Nuestros Productos</h2>
+    <div class="row g-4">
+
+    <ul id="product-list">
+      {{#each products}}
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm" style="width: 16rem;">
+            <img src="{{this.thumbnail}}" 
+                 class="card-img-top" alt="{{this.title}}">
+            <div class="card-body">
+              <h5 class="card-title">{{this.title}}</h5>
+              <p class="card-text">{{this.description}}</p>
+              <p class="fw-bold text-success">${{this.price}}</p>
+              <a href="/cart/add/{{this.id}}" class="btn btn-primary w-100">Agregar al Carrito</a>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </ul>
+    
+  <form id="form-product" class="d-flex flex-column gap-3 p-4 shadow rounded bg-light" style="max-width: 400px; margin: 0 auto;">
+    <input type="text" id="title" placeholder="Nombre del producto" required>
+    <input type="number" id="price" placeholder="Precio" required>
+    <button type="submit" class="btn btn-success w-100 fw-bold">Agregar</button>
+  </form>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p class="mb-0">&copy; 2025 TechStore. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/realTime.js"></script>
+
+</body>
+</html>
