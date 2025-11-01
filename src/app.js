@@ -6,8 +6,13 @@ const {cartRouter} = require("./routes/cartRouter.js")
 const {router:viewsRouter} = require("./routes/viewsRouter.js");
 
 const {Server} = require("socket.io");
+const { mongoDb } = require("./config/db.js");
+require("dotenv").config();
+
+const mongoUrl=process.env.MONGO_URL;
 const PORT = 3000;
 const app = express();
+
 
 //-----------------middleware----------------------//
 app.use(express.json());
@@ -28,16 +33,23 @@ app.use("/api/realTimeProducts", productsRouter);
 app.use("/api/cart" , cartRouter);
 app.use("/", viewsRouter)
 
+mongoDb(mongoUrl
+, "dataBase1");
+
+
 //----------------server HTTP y socket---------------------//
 const server = app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost: ${PORT}`);
 });
 
-const io = new Server(server)
 
+    const io = new Server(server)
 
-io.on("connection", (socket) => {
-    console.log("Usuario conectado", socket.id)
-})
-
-
+    io.on("connection", (socket) => {
+        console.log("Usuario conectado", socket.id)
+        
+        socket.on("nuevoProducto", (product)=>{
+            io.emit("nuevoProducto", product);
+        });
+    
+});

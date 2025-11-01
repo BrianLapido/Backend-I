@@ -1,0 +1,201 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-image: url(/img/fondo.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  text-shadow:
+   0 0 5px #00ff88,
+    0 0 10px #00ff88,
+    0 0 20px #00ff88,
+    0 0 40px #00ff88; 
+}
+
+/* ---------------------------
+  Productos
+--------------------------- */
+#product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem; /* espacio entre tarjetas */
+  list-style: none;
+  padding: 20px;
+  margin: 2rem auto;
+  max-width: 1200px; /* límite de ancho del contenedor */
+}
+
+
+/* ---------------------------
+  Tarjetas de Producto
+--------------------------- */
+.card {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+
+.card:hover {
+
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.2);
+}
+
+.card-body {
+  padding: 1rem 1.2rem;
+}
+
+.card-title {
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.card .text-success {
+  color: #28a745 !important;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+/* ---------------------------
+  Botón de Agregar al Carrito
+--------------------------- */
+.btn{
+  display: flex;
+  justify-content: center;
+
+}
+.add-to-cart {
+  max-width: 100px;
+  background-color: #007bff;
+  color: #0f0f0f;
+  text-decoration: none;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.add-to-cart:hover {
+  background-color: #0056b3;
+  transform: scale(1.03);
+}
+
+/* ---------------------------
+   Paginación
+--------------------------- */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin: 2rem 0;
+  margin-left: 80px;
+}
+
+.paginacion a {
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  text-shadow: 0 0 8px #00ffff;
+  transition: all 0.3s ease-in-out;
+}
+
+.paginacion a:hover {
+  background-color: #00ffff;
+  color: #000;
+  box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+  transform: scale(1.05);
+}
+
+/* ---------------------------
+  Formulario
+--------------------------- */
+#form-product {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 380px;
+  margin: 2rem auto;
+  border: 1px solid #dee2e6;
+}
+
+#form-product input {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  padding: 0.7rem;
+  transition: border-color 0.3s ease;
+}
+
+#form-product input:focus {
+  border-color: #198754;
+  outline: none;
+  box-shadow: 0 0 5px rgba(25, 135, 84, 0.4);
+}
+
+#form-product button {
+  background-color: #198754;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+#form-product button:hover {
+  background-color: #157347;
+  box-shadow: 0 4px 12px rgba(25, 135, 84, 0.4);
+}
+
+/* ---------------------------
+  Footer
+--------------------------- */
+footer {
+  background-color: #2b2a2a;
+  color: #f8f9fa;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+
+footer p {
+  display: flex;
+  justify-content: end;
+  margin: 0;
+}
