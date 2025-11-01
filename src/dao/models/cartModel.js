@@ -43,5 +43,5 @@ const cartModel = mongoose.model(
     )
 );
 
- /* await cartModel.deleteMany({})  */
+
 module.exports= cartModel
