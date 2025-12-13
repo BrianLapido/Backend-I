@@ -5,7 +5,7 @@ export const mongoDb = async (url, dbName) =>{
     
     try {
         await mongoose.connect(
-            url,{
+            process.env.MONGO_URL,{
                 dbName
             }
         )

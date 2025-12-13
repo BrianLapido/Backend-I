@@ -112,7 +112,7 @@ form.addEventListener("submit", async (e) =>{
     }
 
     try {
-        const response = await fetch("/api/realTimeProducts",{
+        const response = await fetch("/api/products",{
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({title, price}),

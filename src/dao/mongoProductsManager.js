@@ -2,7 +2,7 @@ const productModel=require("./models/productsModel.js");
 
 class MongoProductsManager{
 
-    static async getProducts(limit = 10, page = 1){
+    static async getProducts(limit = 12, page = 1){
         try {
             const productos= await productModel.paginate({}, {limit, page, lean: true})
             return productos;

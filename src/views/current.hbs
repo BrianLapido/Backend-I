@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>perfil-techStore</title>
+    <link rel="stylesheet" href="/css/current.css">
+<body>
+   <nav class="navbar">
+    <div class="container">
+      <a class="brand" href="#">TechStore 💻</a>
+      <p class="info">Edad: {{user.age}} años</p>
+
+      <div class="user-bubble" title="Rol del usuario">{{user.role}}
+    </div>
+    
+      <a class="logout-btn" href="/api/sessions/logout">Cerrar sesión</a>
+    </div>
+  </nav>
+
+  <header class="profile-header">
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>Bienvenido/a {{user.first_name}} {{user.last_name}}</h1>
+      
+      <p class="info">Nos alegra verte de nuevo en <span>TechStore</span></p>
+      <a href="/products" class="btn-products">Ver Productos</a>
+    </div>
+  </header>   
+  
+</body>
+</html>

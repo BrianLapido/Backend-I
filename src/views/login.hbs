@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="login-container">
+    <div class="login-box animated">
+        <h1>Bienvenido!</h1>
+        <p class="subtitle">Iniciar sesión</p>
+        
+
+        <form id="formLogin" action="/api/users/login" method="POST">
+            <div class="inputGroup">
+                <label>Email:</label>
+                <input type="email" name="email">
+            </div>
+            <div class="inputGroup">
+                <label>Contraseña:</label>
+                <input type="password" name="password">
+            </div>
+              {{#if error}}
+                <div class="alert-error">{{error}}</div>
+        {{/if}}
+            <button class="btn" type="submit">Ingresar</button>
+        </form>
+        
+        <p class="register-text">¿No tienes cuenta? 
+            <a href="/register">Registrate aquí</a>
+        </p>
+        
+    </div>
+</div>
+</body>
+</html>

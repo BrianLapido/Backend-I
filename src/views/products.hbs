@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tienda de Computadoras</title>
-  <link rel="stylesheet" href="/css/realTimeProducts.css">
+  <link rel="stylesheet" href="/css/products.css">
 </head>
 <body class="bg-light">
-
+  <a href="/current" class="btn-perfil">Volver al perfil</a>
   <main class="container my-5">
     <h2 class="text-center mb-4">Nuestros Productos</h2>
     <div class="row g-4">
@@ -31,17 +31,17 @@
       {{/each}}
       
     <div class="paginacion">
-      <a href="/realTimeProducts?page=1">Página 1.</a>
+      <a href="/products?page=1">Página 1.</a>
     
       {{#if hasPrevPage}}
-        <a href="/realTimeProducts?page={{prevPage}}">Pág.Anterior.</a>
+        <a href="/products?page={{prevPage}}">Pág.Anterior.</a>
       {{/if}}
 
       {{#if hasNextPage}}
-        <a href="/realTimeProducts?page={{nextPage}}">Pág. Siguiente</a>
+        <a href="/products?page={{nextPage}}">Pág. Siguiente</a>
       {{/if}}
 
-      <a href="/realTimeProducts?page={{totalPages}}">Última página</a>
+      <a href="/products?page={{totalPages}}">Última página</a>
     </div>
       
     </ul>

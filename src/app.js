@@ -1,16 +1,24 @@
 const express = require("express");
 const{engine} = require("express-handlebars")
+const session = require("express-session");
+const cookieParser = require("cookie-parser")
 
+const{routerSession} = require("./routes/sessionsRouter.js")
 const {productsRouter} = require("./routes/productsRouter.js");
 const {cartRouter} = require("./routes/cartRouter.js")
 const {router:viewsRouter} = require("./routes/viewsRouter.js");
+const {userRouter} = require ("./routes/userRouter.js")
 
 const {Server} = require("socket.io");
 const { mongoDb } = require("./config/db.js");
 require("dotenv").config();
+const mongoStore = require("connect-mongo");
+const passport = require("passport");
+const {initializePassport} =require("./config/passport.config.js")
 
 const mongoUrl=process.env.MONGO_URL;
-const PORT = 3000;
+const PORT = process.env.PORT;
+const dbName = process.env.DB_NAME;
 const app = express();
 
 
@@ -18,7 +26,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static("./src/public"))
-
+app.use(cookieParser(process.env.PRIVATE_KEY))
 //---------------handlebars---------------------//
 app.engine("hbs", engine({extname:"hbs"}));
 app.set("view engine", "hbs");
@@ -29,13 +37,31 @@ app.use((req, res, next)=>{
     req.io = io;
     next();
 });
-app.use("/api/realTimeProducts", productsRouter);
-app.use("/api/cart" , cartRouter);
+app.use(session({
+    store: mongoStore.create({
+        mongoUrl,
+        collectionName: `sessions`,
+        ttl: 24 * 60 * 60
+    }),
+    secret: process.env.PRIVATE_KEY,
+    resave: true,
+    saveUninitialized: false,
+    cookie: {maxAge:100 * 60 * 60},
+}));
+
+app.use("/api/users", userRouter)
+app.use("/api/sessions", routerSession)
 app.use("/", viewsRouter)
+app.use("/api/products", productsRouter);
+app.use("/api/cart" , cartRouter);
 
+// --------------------passport---------------------------//
+initializePassport()
+app.use(passport.initialize())
+
+//----------------------mongoDB-----------------------------//
 mongoDb(mongoUrl
-, "dataBase1");
-
+, dbName);
 
 //----------------server HTTP y socket---------------------//
 const server = app.listen(PORT, () => {
@@ -53,3 +79,4 @@ const server = app.listen(PORT, () => {
         });
     
 });
+
