@@ -8,9 +8,30 @@ const usuariosSchema = new mongoose.Schema({
     email: {type: String, require:true, unique: true},
     age: Number,
     password: {type:String, require: true},
-    role: {type: String, require:true, default: `user`}
-})
+    role: {type: String, require:true, default: `user`},
+    cart:{
+        type:[
+            {
+                cart:{
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref:"carts",
+                    require:true
+                },
 
-const users = mongoose.model(usuariosCollection, usuariosSchema)
+                quantity:{
+                    type:Number,
+                    default: 1,
+                    min: 0
+                }
+            }
+        ]
+    }
+},
+{
+        timestamps:true,
+        collection:"users"
+    })
 
-module.exports= {users};
+const usersModel = mongoose.model(usuariosCollection, usuariosSchema)
+
+module.exports= {usersModel};

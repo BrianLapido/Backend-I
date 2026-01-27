@@ -1,27 +1,14 @@
-const {Router} = require("express");
-const routerSession = Router()
+const {Router} = require("./router.js");
+const{passportCall} = require("../middleware/requireAuth")
+const{sessionController} = require ("../controllers/sessionController.js");
+const jwt = require("passport-jwt")
 
+class SessionRouter extends Router{
+    init(){
+        this.get("/current", passportCall(jwt), sessionController.current);
 
-routerSession.get("/logout", (req, res) => {
-    console.log("Cookies actuales:", req.cookies); 
-    
-    res.clearCookie("currentUser", {
-        httpOnly: true,
-        sameSite: "lax"
-    });
+        this.get("/logout", sessionController.logOut);
+    }
+}
 
-    return res.redirect("/");
-});
-
-/* routerSession.get("/logout", async (req, res) =>{
-    req.session.destroy((err)=>{
-        if(err){
-            return res.status(500).send("Error al cerrar sesion")
-        };
-
-        res.redirect("/");
-    })
-})
- */
-
-module.exports = {routerSession};
+module.exports = new SessionRouter().getRouter()

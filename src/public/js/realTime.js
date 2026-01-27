@@ -1,35 +1,51 @@
-const mongoCartManager= require("../../dao/mongoCartsManager.js")
-
 const socket = io();
-//const buttons = document.querySelectorAll(".add-to-cart")
+const buttons = document.querySelectorAll(".add-to-cart")
 const productList = document.getElementById("product-list");
 const form = document.getElementById("form-product");
-let cartId= localStorage.getItem("cartId");
-
+/* let cartId= localStorage.getItem("cartId"); */
+let cartId = document.querySelector("cartId")
 //---------------------logica carrito------------------------//
 async function cartExist() {
-    if(!cartId){
-       try {
-         const res = await fetch("/api/carts", {method: "POST"})
-         const data = await res.json();
-         cartId = data.cart._id;
-         localStorage.setItem("cartId", cartId);
-         console.log("carrito creado", cartId)
-       } catch (error) {
-        console.error("Error al crear carrito:", error)
-       }
-    }
-}
+    if(cartId)return ;
+   
+    const res = await fetch("/api/carts", {method: "POST"})
 
-await cartExist(); 
+    if(!res.ok){
+        throw new Error("No se pudo crear el carrito")
+    };
+
+    const data = await res.json()
+
+    cartId = data.cart._id;
+    localStorage.setItem("cartId", cartId)
+    
+};
+
+cartExist(); 
+// try {
+    //      const res = await fetch("/api/cart", {method: "POST"})
+    //      const data = await res.json();
+
+    //      cartId = data.cart._id;
+    //      localStorage.setItem("cartId", cartId);
+
+    //      console.log("carrito creado", cartId)
+
+    //    } catch (error) {
+    //     console.error("Error al crear carrito:", error)
+    //    }
+
+
 
 //-----------------------Escuchas-------------------------//
 
 socket.on("realTimeProducts", data=>{
     productList.innerHTML="";
+
     data.forEach(p => {
         const div = document.createElement("div");
     div.classList.add("col-md-4");
+
     div.innerHTML = `
       <div class="card h-100 shadow-sm" style="width: 16rem;">
         <img src="${p.thumbnail}" class="card-img-top" alt="${p.title}">
@@ -40,41 +56,42 @@ socket.on("realTimeProducts", data=>{
           <a href="#" class="btn btn-primary w-100 add-to-cart" data-id="${p._id}">Agregar al Carrito</a>
         </div>
       </div>`;
+
     productList.appendChild(div);
   });
     });
 
 
-/* socket.on("realTimeProducts", data=>{
-    productList.innerHTML = "";
-    data.forEach(p => {
-        const li = document.createElement("li");
-        li.textContent = `${p.title} - $${p.price}`
-        li.dataset.id = p.id;
-        productList.appendChild(li);
-    });
-})
+// socket.on("realTimeProducts", data=>{
+//     productList.innerHTML = "";
+//     data.forEach(p => {
+//         const li = document.createElement("li");
+//         li.textContent = `${p.title} - $${p.price}`
+//         li.dataset.id = p.id;
+//         productList.appendChild(li);
+//     });
+// })
 
-socket.on("nuevoProducto", (product)=>{
-    const list = document.getElementById("product-list");
-    if(!list)return;
+// socket.on("nuevoProducto", (product)=>{
+//     const list = document.getElementById("product-list");
+//     if(!list)return;
 
-    const div = document.createElement("div");
-    div.classList.add("col-md-4");
-    div.innerHTML= `
-        <div class="card h-100 shadow-sm" style="width: 16rem;">
-        <img src="${product.thumbnail}" class="card-img-top" alt="${product.title}">
-        <div class="card-body">
-            <h5 class="card-title">${product.title}</h5>
-            <p class="card-text">${product.description}</p>
-            <p class="fw-bold text-success">$${product.price}</p>
-            <a href="#" class="btn btn-primary w-100 add-to-cart" data-id="${product.id}">
-            Agregar al Carrito
-            </a>
-        </div>
-        </div>`;
-    list.appendChild(div);
-}) */
+//     const div = document.createElement("div");
+//     div.classList.add("col-md-4");
+//     div.innerHTML= `
+//         <div class="card h-100 shadow-sm" style="width: 16rem;">
+//         <img src="${product.thumbnail}" class="card-img-top" alt="${product.title}">
+//         <div class="card-body">
+//             <h5 class="card-title">${product.title}</h5>
+//             <p class="card-text">${product.description}</p>
+//             <p class="fw-bold text-success">$${product.price}</p>
+//             <a href="#" class="btn btn-primary w-100 add-to-cart" data-id="${product.id}">
+//             Agregar al Carrito
+//             </a>
+//         </div>
+//         </div>`;
+//     list.appendChild(div);
+// })
 
 
 socket.on("productoEliminado", (product)=>{
@@ -123,18 +140,18 @@ form.addEventListener("submit", async (e) =>{
         const data = await response.json();
         const product = data.newProduct;
 
-        await fetch(`/api/carts/${cartId}/product/${product._id}`, {method: "POST"});
+        await fetch(`api/carts/${cartId}/products/${product._id}`, {method: "POST"});
 
             
         Toastify({
-            text: `Producto "${data.title}" agregado al carrito correctamente.`,
+            text: `Producto "${product.title}" agregado al carrito correctamente.`,
             duration: 3000,
             gravity: "top",
             position: "right",
             style: {background: "#28a745"},
         }).showToast();
             
-        socket.emit("nuevoProducto", data);
+        socket.emit("nuevoProducto", product);
 
         form.reset();
 
@@ -152,20 +169,25 @@ form.addEventListener("submit", async (e) =>{
 });
 
 document.addEventListener("click", async (e)=>{
-    if(e.target.classList.contains("add-to-cart")){
-        e.preventDefault();
-
-        const productId = e.target.dataset.id
+    const btn = e.target.closest(".add-to-cart");
+    if(!btn)return
+    /* if(!e.target.classList.contains("add-to-cart")) return;  */
+        
+    e.preventDefault();
+    const productId = e.target.dataset._id
 
     try {
 
-        if(!cartExist){
-            throw new Error("El carrito no existe")
+        if(!cartId){
+            await cartExist();
             };
 
-        const response = await fetch(`/api/carts/${cartId}/product/${productId}`, {method: "POST"});
+        const response = await fetch(`api/carts/${cartId}/products/${productId}`, {method: "POST"});
 
-        if(!response){throw new Error("Error al agregar producto al carrito.")}
+        if(!response.ok){
+            throw new Error("Error al agregar producto al carrito."
+        )};
+
         const result= await response.json();
 
         Toastify({
@@ -188,5 +210,5 @@ document.addEventListener("click", async (e)=>{
             style: { background: "#dc3545", color: "white" },
         }).showToast();
         }
-    }
+   
 });

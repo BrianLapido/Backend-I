@@ -1,20 +1,24 @@
-const {Router} = require("express")
-const {loginUser, registerUser} = require("../controllers/userController.js")
+const {Router} = require("./router")
+const {userController} =require("../controllers/userController.js")
 
-const userRouter = Router();
+class userRouter extends Router{
+    init(){
+        this.post("/register", userController.registerUser);
 
-userRouter.get("/register", (req, res)=>{
-    const {error} = req.query;
-    res.render("register", {error})
-});
+        this.post("/login", userController.loginUser)
+    };
+}
 
-userRouter.get("/login", (req, res)=>{
-    const {error} = req.query;
-    res.render("login", {error})
-});
+module.exports= new userRouter().getRouter()
 
-userRouter.post("/register", registerUser);
 
-userRouter.post("/login", loginUser);
 
-module.exports={userRouter}
+
+// const {Router} = require("express")
+// const {userController} = require("../controllers/userController.js")
+
+// const userRouter = Router();
+
+// userRouter.post("/register", userController.registerUser);
+
+// userRouter.post("/login", userController.loginUser);

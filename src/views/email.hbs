@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bienvenido/a</title>
+
+  <style>
+   
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, #1d3557, #457b9d);
+      padding: 16px 24px;
+      color: #ffffff;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .info {
+      margin-top: 8px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .header {
+      padding: 40px 30px;
+      text-align: center;
+      background: #f8fafc;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 26px;
+      color: #1d3557;
+    }
+
+    .content {
+      padding: 30px;
+      color: #333333;
+      font-size: 16px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .content p {
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: #457b9d;
+      color: #ffffff !important;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .footer {
+      background: #f1f3f5;
+      padding: 16px;
+      font-size: 12px;
+      color: #777777;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="navbar">
+      <a class="brand" href="#">TechStore 💻</a>
+      <div class="info">👤 {{email}}</div>
+    </div>
+
+    
+    <div class="header">
+      <h1>{{text}}</h1>
+    </div>
+
+    
+    <div class="content">
+      <p>
+        Gracias por registrarte en <strong>TechStore</strong>.  
+        Ya podés explorar nuestros productos y ofertas exclusivas.
+      </p>
+
+      <a href="/register" class="btn">Ir a la tienda 🚀</a>
+    </div>
+
+    
+    <div class="footer">
+      © TechStore · Todos los derechos reservados
+    </div>
+
+  </div>
+</body>
+</html>
+
+
+
+
+
+{{!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido/a</title>
+    <link rel="stylesheet" href="/css/emailHbs.css">
+<body>
+   <nav class="navbar">
+    <div class="nav-left">
+      <a class="brand" href="#">TechStore 💻</a>
+    </div>
+
+    <div class="nav-center">
+      <p class="info">Email: 👤{{email}}</p>
+    </div>
+
+    
+  </nav>
+
+  <header class="profile-header">
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>{{text}}</h1>
+    </div>
+  </header>   
+  
+</body>
+</html> --}}

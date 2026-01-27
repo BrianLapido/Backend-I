@@ -3,39 +3,35 @@ const mongoose = require("mongoose");
 const cartModel = mongoose.model(
     "carts",
     new mongoose.Schema(
-        {
-            role: 
-                {
-                type: String,
-                default: "cart"
+        {   
+            user:{
+                type: mongoose.Schema.ObjectId,
+                ref: "users",
+                required: true,
+                unique: true
             },
             
-            email:{
-                type: String,
-                unique: true,
-                require: false,
-                sparse: true
-            },
-             
-
             products: {
                 type:[
                     {
                         product:{
                             type: mongoose.Schema.Types.ObjectId,
                             ref: "products",
-                            require: true
+                            required: true
                         },
 
                         quantity: {
                             type: Number,
                             default: 1,
-                            min :0
+                            min :1  
                         }
                     }
-                ]
-            }
+                ],
+                default: []
+            },
+             
         },
+
         {
             timestamps: true,
             collection: "carts"  

@@ -1,73 +1,41 @@
-const {users} = require("../dao/models/usuariosModel.js")
-const bcrypt = require ("bcrypt")
-const {generateToken} = require("../utils/jwt.js")
+const {userService} = require("../service/usersService.js")
 
-async function loginUser(req, res) {
+class userController{
+    static async loginUser(req, res){
+    try {
+        const {token} = await userService.loginUserServices(req.body)
 
-    const { email, password} = req.body
-    
-    if(!email || !password){    
-        return res.redirect("/api/users/login?error=Debe completar todos los campos")
-    }
-    
-    const user = await users.findOne({email})
+        res.cookie("currentUser", token, {
+            signed: true,
+            httpOnly: true
+        });
 
-    if(!user){
-        res.redirect("/api/users/login?error=El usuario no existe!")
-    }
+        res.redirect("/current")
+        
+    } catch (error) {
+        res.redirect(`/?error=${error.message}`)
+    };
+};
 
-    const isValidPassword = bcrypt.compareSync(password, user.password)
-    
-    if(!isValidPassword){
-        return res.redirect("/api/users/login?error=Contraseña incorrecta")
-    }
+    static async registerUser (req, res) {
+    try {
+        const token= await userService.registerUserService(req.body);
 
-    const token = generateToken(user)
+        res.cookie("currentUser", token, {
+            signed: true,
+            httpOnly: true,
+            maxAge: 3600000
+        })
+        res.sendSucces("Usuario registrado correctamente")
+        res.redirect("/current")
 
-    res.cookie("currentUser" , token, {signed: true, httpOnly: true})
-    res.redirect("/current")
-
-
+    } catch (error) {
+        res.redirect(`/register?error=${error.message}`)
+        res.sendServerError(error.message);
+    };
+};
 }
 
-async function registerUser(req, res) {
-
-        const {first_name, last_name, email, password, age, role} = req.body
-
-         if(!first_name || !last_name || !email || !password || !age){
-        return res.redirect("/api/users/register?error=Faltan datos obligatorios")
-    }
-    
-    const userExist = await users.findOne({email})
-    
-    if(userExist){
-        return res.redirect("/api/users/register?error=El usuario ya existe")
-    }
-    
-    const hashedPass = bcrypt.hashSync(password, 10)
-
-     const newUser = await users.create({
-        first_name,
-        last_name,
-        age,
-        email,
-        role,
-        password: hashedPass
-    })
 
 
-    const token = generateToken(newUser)
-
-    res.cookie("currentUser" , token, {
-        signed: true, 
-        httpOnly: true,
-        maxAge:3600000
-    });
-
-     res.redirect("/register/success");
-}
-
-module.exports={
-    loginUser,
-    registerUser
-}
+module.exports={userController}
