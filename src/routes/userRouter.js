@@ -10,15 +10,3 @@ class userRouter extends Router{
 }
 
 module.exports= new userRouter().getRouter()
-
-
-
-
-// const {Router} = require("express")
-// const {userController} = require("../controllers/userController.js")
-
-// const userRouter = Router();
-
-// userRouter.post("/register", userController.registerUser);
-
-// userRouter.post("/login", userController.loginUser);

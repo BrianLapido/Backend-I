@@ -49,20 +49,22 @@ static async registerUserService(userData){
         last_name, 
         email, 
         age,  
-        password:hashedPass
+        password:hashedPass,
+    });
+
+    
+    await sendWelcomeEmail({
+        dest: newUser.email,
+        name: newUser.first_name,
     });
 
     const token = generateToken({
         id: newUser._id,
         email: newUser.email,
+        role: newUser.role
     });
-
-    await sendWelcomeEmail({
-        dest: user.email,
-        name: user.first_name
-    })
-
-    return generateToken ({newUser, token});
+    
+    return token;
 }
 }
 

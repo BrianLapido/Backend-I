@@ -13,7 +13,8 @@ class userController{
         res.redirect("/current")
         
     } catch (error) {
-        res.redirect(`/?error=${error.message}`)
+        /* res.redirect(`/?error=${error.message}`) */
+        res.sendServerError(error.message);
     };
 };
 
@@ -26,12 +27,12 @@ class userController{
             httpOnly: true,
             maxAge: 3600000
         })
-        res.sendSucces("Usuario registrado correctamente")
-        res.redirect("/current")
+        /* res.sendSuccess("Usuario registrado correctamente") */
+        res.redirect("/current?success=Usuario creado correctamente ")
 
     } catch (error) {
         res.redirect(`/register?error=${error.message}`)
-        res.sendServerError(error.message);
+        /* res.sendServerError(error.message); */
     };
 };
 }

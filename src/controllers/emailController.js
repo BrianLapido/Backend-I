@@ -21,28 +21,3 @@ class EmailController {
 }
 
 module.exports = { EmailController };
-
-    // // static async sendEmailHbs(req, res, next){
-
-    // //     try {
-    // //         const {dest, name} = req.body
-           
-
-    // //         const emailConfig = {
-    // //             from: process.env.EMAIL,
-    // //             to: dest,
-    // //             subject: `Bienvenido!`,
-    // //             template: `email`,
-    // //             context:{
-    // //                 text: 
-    // //                 email: dest
-    // //             }
-    // //         };
-
-    // //         const response = await transporter.sendMail(emailConfig)
-    // //         res.sendSucces(response)
-
-    // //     } catch (error) {
-    // //         res.sendServerError(error.message)
-    // //     }
-    // }

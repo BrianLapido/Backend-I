@@ -31,13 +31,11 @@ const hbsConfig = {
         }
     }; */
 
-
-
     transporter.use(`compile`, hbs.default(hbsConfig));
-
+    
     const sendWelcomeEmail = async ({dest, name}) =>{
         return transporter.sendMail({
-            from: process.env.EMAIL,
+            from: `TechStore ${transporter.options.auth.user}`,
             to: dest,
             subject: `¡Bienvenido!`,
             template: `email`,
