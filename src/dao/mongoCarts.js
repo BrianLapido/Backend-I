@@ -3,8 +3,7 @@ const cartModel=require("./models/cartModel.js");
 class cartsDAO{
 
     static async getAllCarts(){
-        return await cartModel.find().lean()
-        
+        return await cartModel.find().lean() 
     };
 
     static async getCartById(cid){
@@ -14,6 +13,10 @@ class cartsDAO{
     static async getCartByIdRaw(cid){
         return await cartModel.findById(cid)
     };
+
+    static async getCartByUser(userId){
+        return await cartModel.findOne({user:userId})
+    }
 
     static async createNewCart(cartData){
         return await cartModel.create(cartData)

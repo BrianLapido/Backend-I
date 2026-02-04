@@ -23,19 +23,23 @@ static async getCartById(req, res){
 
 static async createCart(req, res){
     try {
-        const {email} = req.body;
-        const newCart = await cartService.createCartService(email)
+        /* const {userId} = req.body; */
+        const userId= req.user._id
+
+        const newCart = await cartService.createCartService(userId);
+
         res.status(201).json({
             message:"Carrito creado",
             cart: newCart
         });
     } catch (error) {
-        res.status(500).json({error: error.message})
+        res.status(400).json({error: error.message})
     };
 };
 
 static async addProductToCart(req, res){
     try {
+        console.log("PARAMS:", req.params);
         const {cid, pid}= req.params
         const addProduct = await cartService.addProductToCartService(cid, pid)
         
@@ -44,7 +48,7 @@ static async addProductToCart(req, res){
         addProduct
     })        
     } catch (error) {
-        res.status(500).json({error: error.message})
+        res.status(400).json({error: error.message})
     }
 };
 

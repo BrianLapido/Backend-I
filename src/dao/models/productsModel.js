@@ -4,19 +4,19 @@ const mongoosePaginate = require("mongoose-paginate-v2");
     const productSchema = new mongoose.Schema({
             title: {
                 type:String, 
-                require:true,
+                required:true,
                 trim: true
                 },
 
             price: {
                 type:Number,
-                require:true,
+                required:true,
                 min: 0
                 },
             
             description:{
                 type: String,
-                require: true
+                required: true
                 },
             
             code: {
@@ -26,7 +26,7 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 
             stock:{
                 type: Number,
-                require: true,
+                required: true,
                 min:0
             },
             
@@ -37,7 +37,7 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 
             category: {
                 type: String,
-                require: true
+                required: true
             },
 
             

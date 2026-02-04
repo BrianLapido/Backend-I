@@ -25,41 +25,51 @@ static async getCartByIdService(cid){
 };
 
 //--------------------Crear carrito------------------//
-static async createCartService(email = null){
+static async createCartService(userId){
+    const cartExist = await cartsDAO.getCartByUser(userId);
 
-    const newCart = await cartsDAO.createNewCart({email, products:[]})
+    if(cartExist){
+       return cartExist 
+    };
+
+    const newCart = await cartsDAO.createNewCart({user:userId, products:[]})
 
     if(!newCart){
         throw new Error("Error al crear el carrito")
     };
-
+    
     return newCart;
+
 };
 
 //--------------------agregar producto a carrito-------------------------//
 static async addProductToCartService(cid, pid){
-
+     console.log("SERVICE START", { cid, pid });
     if(!isValidObjectId(cid) || !isValidObjectId(pid)){
         throw new Error ("ID de carrito o producto invalido")
     };
-
+    
     const cart = await cartsDAO.getCartByIdRaw(cid)
+    console.log("CART FOUND:", cart?._id, cart?.products);
 
     if(!cart){
         throw new Error("Carrito no encontrado")
     };
 
-    const productExist = await productModel.findById(pid)
+    const productExist = await productModel.findById(pid);
+
     if(!productExist){
         throw new Error("Producto no encontrado")
     };
 
+    
     const productInCart = cart.products.find(
-        p => p.product.toString() === pid
+        p => p.product && p.product.toString() === pid
     );
 
     if(productInCart){
         productInCart.quantity += 1; 
+
     }else{
         cart.products.push({
             product: pid,
@@ -67,7 +77,9 @@ static async addProductToCartService(cid, pid){
         });
     };
 
-    await cart.save()
+    cart.markModified("products");
+
+    await cart.save();
     return await cart.populate("products.product");
 };
 

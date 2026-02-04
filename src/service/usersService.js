@@ -1,7 +1,8 @@
 const {usersDAO} = require("../dao/mongoUsers.js");
 const bcrypt = require("bcrypt");
 const {generateToken} = require("../utils/jwt.js");
-const {sendWelcomeEmail} = require("./emailService.js")
+const {sendWelcomeEmail} = require("./emailService.js");
+const cartModel = require("../dao/models/cartModel.js");
 
 class userService{
     
@@ -52,6 +53,14 @@ static async registerUserService(userData){
         password:hashedPass,
     });
 
+    const newCart = await cartModel.create({
+        user: newUser._id,
+        products: []
+    });
+
+    newUser.cart = newCart._id;
+    await newUser.save();
+
     
     await sendWelcomeEmail({
         dest: newUser.email,
@@ -61,7 +70,8 @@ static async registerUserService(userData){
     const token = generateToken({
         id: newUser._id,
         email: newUser.email,
-        role: newUser.role
+        role: newUser.role,
+        cart: newCart._id
     });
     
     return token;

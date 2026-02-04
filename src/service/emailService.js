@@ -11,25 +11,6 @@ const hbsConfig = {
         viewPath: path.resolve(`./src/views`),
         extName: `.hbs`
 };
-/* static async sendEmail(req, res, next){
-
-        try {
-            const {dest, name} = req.body
-            const emailConfig = {
-                from: process.env.EMAIL,
-                to: dest,
-                subject: `Bienvenido/a a Techstore`,
-                html: `<h2>Hola ${name} gracias por registrarte</h2>`,
-               
-            };
-
-            const response = await transporter.sendMail(emailConfig)
-            res.json(response);
-
-        } catch (error) {
-            next(error)
-        }
-    }; */
 
     transporter.use(`compile`, hbs.default(hbsConfig));
     

@@ -34,29 +34,6 @@ const handlePolicies = policies => (req, res, next) =>{
     
 }
     
-    // const authCookies = req.signedCookies?.currentUser
-    // if(!authCookies){
-    //     return res.status(401).send({status: `error`, error:`No autorizado`})
-    // };
-
-
-    // let user;
-
-    //  try {
-    //     user= jwt.verify(token, process.env.PRIVATE_KEY)
-    // } catch (error) {
-    //     return res.status(401).json({status: error, message:"Token invalido"})
-    // };
-
-
-    // if(!policies.includes(user.role?.toUpperCase())){
-    //     return res.status(403).send({status: `error`, error:`Acceso prohibido`})
-    // };
-
-    // req.user= user
-    // next()
-
-
 module.exports= {
     handlePolicies
 }

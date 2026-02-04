@@ -3,30 +3,36 @@ const mongoose = require("mongoose");
 const usuariosCollection = `users`;
 
 const usuariosSchema = new mongoose.Schema({
-    first_name: {type:String, require:true},
-    last_name: {type:String, require:true},
-    email: {type: String, require:true, unique: true},
+
+    first_name: {type:String, required:true},
+
+    last_name: {type:String, required:true},
+
+    email: {type: String, required:true, unique: true},
+
     age: Number,
-    password: {type:String, require: true},
-    role: {type: String, require:true, default: `user`},
+
+    password: {type:String, required: true},
+
+    role: {type: String, required:true, default: `user`},
+
     cart:{
         type:[
             {
-                cart:{
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref:"carts",
-                    require:true
-                },
+                type: mongoose.Schema.Types.ObjectId,
+                
+                ref: "carts",
 
                 quantity:{
                     type:Number,
                     default: 1,
-                    min: 0
+                    min: 1
                 }
             }
         ]
     }
 },
+
 {
         timestamps:true,
         collection:"users"

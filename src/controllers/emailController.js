@@ -1,4 +1,4 @@
-// controllers/emailController.js
+
 const { sendWelcomeEmail } = require("../service/emailService.js");
 
 class EmailController {

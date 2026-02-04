@@ -13,8 +13,8 @@ class userController{
         res.redirect("/current")
         
     } catch (error) {
-        /* res.redirect(`/?error=${error.message}`) */
-        res.sendServerError(error.message);
+        res.redirect(`/?error=${error.message}`)
+        /* res.sendServerError(error.message); */
     };
 };
 
