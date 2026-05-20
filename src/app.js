@@ -65,7 +65,7 @@ app.use("/api/email", emailRouter)
 
 //----------------server HTTP y socket---------------------//
 const server = app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost: ${PORT}`);
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
 
 

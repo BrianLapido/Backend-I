@@ -1,0 +1,17 @@
+services:
+- type: web
+  name: backend3
+  env: node
+  plan: free
+  buildCommand: npm ci --omit:dev
+  startCommand: npm start
+  envVars:
+  - key: NODE_ENV
+    value: production
+  - key: PRIVATE_KEY
+    value: clavesecreta
+  - key: LOG_LEVEL
+    value: info
+  autoDeploy: true
+  branch: main
+  

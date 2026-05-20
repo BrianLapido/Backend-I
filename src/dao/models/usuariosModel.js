@@ -17,19 +17,8 @@ const usuariosSchema = new mongoose.Schema({
     role: {type: String, required:true, default: `user`},
 
     cart:{
-        type:[
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                
-                ref: "carts",
-
-                quantity:{
-                    type:Number,
-                    default: 1,
-                    min: 1
-                }
-            }
-        ]
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "carts"
     }
 },
 

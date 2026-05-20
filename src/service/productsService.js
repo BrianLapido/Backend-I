@@ -5,9 +5,9 @@ const {productsDAO}= require("../dao/mongoProducts.js");
 class productsService{
     //------------------------Obtener productos-----------------------//
 
-static async getProductsService (){
+static async getProductsService (limit, page){
 
-        const products = await productsDAO.getAll()
+        const products = await productsDAO.getAll(limit, page)
         return products
 };
 
@@ -31,7 +31,7 @@ static async getProductsByIdService(id){
 static async addProductService(data){
     const {title, price}= data;
 
-    if(!title || !price){
+    if(!title || price === undefined){
         throw new Error("Titulo y precio son requeridos")
     };
 
@@ -40,7 +40,17 @@ static async addProductService(data){
         throw new Error(`Ya existe el producto ${title}`)
     };
 
-    let newProduct = await productsDAO.createProduct(data);
+    const productData = {
+        ...data,
+        title,
+        price,
+        description: data.description || title,
+        code: data.code || `${title.replace(/\s+/g, "-").toLowerCase()}-${Date.now()}`,
+        stock: data.stock ?? 1,
+        category: data.category || "general"
+    };
+
+    let newProduct = await productsDAO.createProduct(productData);
 
     return newProduct
 };

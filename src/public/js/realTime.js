@@ -2,13 +2,18 @@ const socket = io();
 const buttons = document.querySelectorAll(".add-to-cart");
 const productList = document.getElementById("product-list");
 const form = document.getElementById("form-product");
-let cartId = localStorage.getItem("cartId");
 /* let cartId = document.querySelector("cartId") */
 //---------------------logica carrito------------------------//
-async function cartExist() {
+/* async function cartExist() {
   if (cartId) return cartId;
 
-  const res = await fetch("/api/carts", { method: "POST" });
+  const res = await fetch("/api/carts", { 
+    method: "POST",
+    headers:{
+      "Authorization" : `Bearer ${localStorage.getItem("token")}`
+    },
+    body:JSON.stringify({products: []})
+   });
 
   if (!res.ok) {
     throw new Error("No se pudo crear el carrito");
@@ -22,9 +27,9 @@ async function cartExist() {
   console.log("🛒 Carrito creado:", cartId);
   return cartId
 }
-cartExist();
+cartExist(); */
 
-localStorage.clear()
+
 
 //-----------------------Escuchas-------------------------//
 
@@ -96,12 +101,15 @@ form.addEventListener("submit", async (e) => {
     }
 
     const data = await response.json();
-    const product = data.newProduct;
+    const product = data.product;
 
-    await fetch(`api/carts/${cartId}/products/${product._id}`, {
+    await fetch(`/api/carts/products/${product._id}`, {
       method: "POST",
     });
 
+    document.dispatchEvent(new CustomEvent("cart:changed"));
+
+    
     Toastify({
       text: `Producto "${product.title}" agregado al carrito correctamente.`,
       duration: 3000,
@@ -135,19 +143,16 @@ document.addEventListener("click", async (e) => {
   const productId = btn.dataset.id;
      
   try {
-    if (!cartId) {
-      throw new Error("Carrito no disponible");
-    }
-
-    const response = await fetch(`/api/carts/${cartId}/products/${productId}`, {
-      method: "POST",
+    const response = await fetch(`/api/carts/products/${productId}`, {
+      method: "POST"
     });
 
     if (!response.ok) {
       throw new Error("Error al agregar producto al carrito.");
     }
 
-    const result = await response.json();
+    await response.json();
+    document.dispatchEvent(new CustomEvent("cart:changed"));
 
     Toastify({
       text: "Producto agregado al carrito 🛒",

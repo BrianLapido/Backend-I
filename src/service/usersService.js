@@ -2,7 +2,7 @@ const {usersDAO} = require("../dao/mongoUsers.js");
 const bcrypt = require("bcrypt");
 const {generateToken} = require("../utils/jwt.js");
 const {sendWelcomeEmail} = require("./emailService.js");
-const cartModel = require("../dao/models/cartModel.js");
+const {CartService} = require("./cartsService.js");
 
 class userService{
     
@@ -22,11 +22,13 @@ static async loginUserServices({email, password}){
     };
 
     const token = generateToken({
-        id: user._id,
+        _id: user._id,
         name: user.first_name,
+        first_name: user.first_name,
         last_name:user.last_name,
         email:user.email,
-        role:user.role
+        role:user.role,
+        cart: user.cart
     })
     return {user, token};
 
@@ -53,10 +55,7 @@ static async registerUserService(userData){
         password:hashedPass,
     });
 
-    const newCart = await cartModel.create({
-        user: newUser._id,
-        products: []
-    });
+    const newCart = await CartService.createCartService(newUser._id);
 
     newUser.cart = newCart._id;
     await newUser.save();
@@ -68,7 +67,9 @@ static async registerUserService(userData){
     });
 
     const token = generateToken({
-        id: newUser._id,
+        _id: newUser._id,
+        first_name: newUser.first_name,
+        last_name: newUser.last_name,
         email: newUser.email,
         role: newUser.role,
         cart: newCart._id

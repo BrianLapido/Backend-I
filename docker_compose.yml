@@ -1,0 +1,16 @@
+services:
+  app:
+    container_name: backend3
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: backend:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - LOG_LEVEL=info
+    volumes:
+      - ./src/logs:/app/src/logs
+    restart: unless-stopped

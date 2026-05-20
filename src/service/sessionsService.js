@@ -5,9 +5,10 @@ const getCurrentSessionService = async (user) =>{
     };
 
     return {
-        id: user._id,
+        id: user._id || user.id,
         email: user.email,
-        role: user.role
+        role: user.role,
+        cart: user.cart
     };
 };
 
